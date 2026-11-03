@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101112">
+  <meta name="description" content="Auto-Plato, votre prochaine route commence ici. Explorez des modèles documentés et contactez-nous sur WhatsApp.">
+  <title>Auto-Plato — Votre prochaine route commence ici</title>
+  <link rel="icon" href="assets/auto-plato-logo.jpeg" type="image/jpeg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <div class="ambient" aria-hidden="true">
+    <video id="siteVideo" autoplay muted loop playsinline preload="metadata" poster="assets/auto-plato-lockup.jpeg">
+      <source src="assets/auto-plato-background.mp4" type="video/mp4">
+    </video>
+    <div class="ambient-shade"></div>
+  </div>
+
+  <header class="header" id="top">
+    <div class="container nav">
+      <a class="brand" href="#accueil" aria-label="Auto-Plato, accueil">
+        <img src="assets/auto-plato-lockup.jpeg" alt="Logo Auto-Plato">
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainNav"><span></span><span></span></button>
+      <nav id="mainNav" class="nav-links" aria-label="Navigation principale">
+        <a href="#accueil">Accueil</a><a href="#categories">Catégories</a><a href="#vehicules">Catalogue</a><a href="#apropos">À propos</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="button button-gold nav-contact" href="https://wa.me/2250504552364" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <section class="hero" id="accueil">
+      <div class="container hero-content">
+        <p class="eyebrow"><span></span> Auto-Plato · Abidjan, Côte d’Ivoire</p>
+        <h1>Votre prochaine route<br>commence <em>ici.</em></h1>
+        <p class="hero-lead">SUV, berlines, 4x4, citadines, utilitaires et hybrides. Parcourez une sélection de modèles et leurs informations techniques.</p>
+        <div class="hero-actions"><a class="button button-gold" href="#vehicules">Découvrir le catalogue <span>↘</span></a><a class="button button-ghost" href="https://wa.me/2250504552364?text=Bonjour%20Auto-Plato%2C%20je%20souhaite%20des%20informations." target="_blank" rel="noopener">Écrire sur WhatsApp <span>↗</span></a></div>
+        <div class="hero-foot"><span>01 — Sélection de véhicules</span><span class="scroll-cue">Défiler <b>↓</b></span></div>
+      </div>
+      <div class="hero-index" aria-hidden="true">AP / 01</div>
+    </section>
+
+    <section class="section category-section" id="categories">
+      <div class="container">
+        <div class="section-heading reveal"><div><p class="eyebrow"><span></span> Explorer par catégorie</p><h2>Une gamme pour<br><em>chaque itinéraire.</em></h2></div><p>Choisissez une catégorie pour filtrer la sélection et consulter les caractéristiques publiées par les constructeurs.</p></div>
+        <div class="category-grid" id="categoryGrid"></div>
+      </div>
+    </section>
+
+    <section class="section inventory-section" id="vehicules">
+      <div class="container">
+        <div class="section-heading reveal"><div><p class="eyebrow"><span></span> Sélection Auto-Plato</p><h2>Le catalogue.</h2></div><p>Prix et données techniques repris de pages officielles de constructeurs et distributeurs en Côte d’Ivoire. Disponibilité et tarifs à confirmer directement avec Auto-Plato.</p></div>
+        <div class="filter-bar reveal" role="search">
+          <label class="search-field"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Rechercher un modèle" aria-label="Rechercher par modèle"></label>
+          <label><span class="sr-only">Catégorie</span><select id="categoryFilter"><option value="">Toutes les catégories</option></select></label>
+          <label><span class="sr-only">Prix maximum</span><select id="priceFilter"><option value="">Tous les prix</option><option value="10000000">Jusqu’à 10 M FCFA</option><option value="20000000">Jusqu’à 20 M FCFA</option><option value="30000000">Jusqu’à 30 M FCFA</option><option value="40000000">Jusqu’à 40 M FCFA</option><option value="60000000">Jusqu’à 60 M FCFA</option></select></label>
+          <label><span class="sr-only">Carburant</span><select id="fuelFilter"><option value="">Tous les carburants</option></select></label>
+          <label><span class="sr-only">Transmission</span><select id="gearFilter"><option value="">Toutes les transmissions</option><option value="Automatique">Automatique</option><option value="Manuelle">Manuelle</option><option value="CVT">CVT</option><option value="Manuelle / automatique">Manuelle / automatique</option></select></label>
+        </div>
+        <div class="results-line"><span id="resultCount" aria-live="polite"></span><button id="resetFilters" class="text-button" type="button">Réinitialiser les filtres <span>↺</span></button></div>
+        <div class="vehicle-grid" id="vehicleGrid"></div>
+        <p class="catalog-note">Les fiches décrivent les versions indiquées par leurs sources. Elles ne constituent pas une confirmation de stock Auto-Plato. Les prix affichés sont des prix de départ publiés ou « sur demande ».</p>
+      </div>
+    </section>
+
+    <section class="section approach-section">
+      <div class="container approach-grid">
+        <div class="approach-title reveal"><p class="eyebrow"><span></span> Un parcours simple</p><h2>Choisir.<br>Comparer.<br><em>Nous écrire.</em></h2><a class="text-link" href="#contact">Parler à Auto-Plato <span>↗</span></a></div>
+        <div class="approach-list">
+          <article class="approach-item reveal"><span>01</span><div><h3>Explorez les catégories</h3><p>Filtrez par carrosserie, énergie, boîte et budget pour parcourir les modèles.</p></div><b>↗</b></article>
+          <article class="approach-item reveal"><span>02</span><div><h3>Consultez les données</h3><p>Ouvrez une fiche détaillée et retrouvez la source constructeur ou distributeur.</p></div><b>↗</b></article>
+          <article class="approach-item reveal"><span>03</span><div><h3>Posez votre question</h3><p>Chaque véhicule mène directement à une conversation WhatsApp préremplie.</p></div><b>↗</b></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="apropos">
+      <div class="container about-grid">
+        <div class="about-brand reveal"><img src="assets/auto-plato-logo.jpeg" alt="Logo Auto-Plato"><span>ABIDJAN · CÔTE D’IVOIRE</span></div>
+        <div class="about-copy reveal"><p class="eyebrow"><span></span> À propos</p><h2>La route, en toute <em>confiance.</em></h2><p>Auto-Plato est une concession basée à Abidjan, spécialisée dans la vente de véhicules fiables, le conseil personnalisé et l’accompagnement des clients.</p><p class="source-note">Les modèles et données techniques présentés sur ce site vitrine proviennent de pages publiques de constructeurs ou distributeurs. Auto-Plato n’est pas présenté comme distributeur officiel des marques citées.</p></div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal"><p class="eyebrow"><span></span> Contact</p><h2>Un projet auto ?<br><em>Parlons-en.</em></h2><p>Indiquez le modèle qui vous intéresse. Votre demande s’ouvrira dans WhatsApp avec le numéro Auto-Plato.</p><div class="contact-detail"><span>WhatsApp</span><a href="https://wa.me/2250504552364" target="_blank" rel="noopener">+225 05 04 55 23 64 <b>↗</b></a></div><div class="contact-detail"><span>Localisation</span><strong>Abidjan, Côte d’Ivoire</strong></div></div>
+        <form class="contact-form reveal" id="contactForm">
+          <div class="form-row"><label>Votre nom<input name="name" autocomplete="name" required placeholder="Nom et prénom"></label><label>Téléphone<input name="phone" autocomplete="tel" required type="tel" placeholder="Votre numéro"></label></div>
+          <label>Véhicule souhaité<select name="vehicle" id="contactVehicle"><option value="">Choisir un modèle (facultatif)</option></select></label>
+          <label>Votre message<textarea name="message" required rows="4" placeholder="Comment pouvons-nous vous aider ?"></textarea></label>
+          <div class="form-submit"><button class="button button-gold" type="submit">Continuer sur WhatsApp <span>↗</span></button><small>Le formulaire prépare un message WhatsApp ; il ne stocke pas vos informations sur ce site.</small></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-main"><a class="brand footer-brand" href="#accueil"><img src="assets/auto-plato-lockup.jpeg" alt="Logo Auto-Plato"></a><p>Votre prochaine route commence ici.</p><div class="footer-links"><a href="#categories">Catégories</a><a href="#vehicules">Catalogue</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></div></div><div class="container footer-bottom"><span>© Auto-Plato · Site vitrine</span><span>Photos et données techniques : sources constructeurs/distributeurs citées dans les fiches.</span><a href="#top">Retour en haut ↑</a></div></footer>
+
+  <a class="whatsapp-float" href="https://wa.me/2250504552364" target="_blank" rel="noopener" aria-label="Écrire à Auto-Plato sur WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.03 3.2a12.7 12.7 0 0 0-10.9 19.2L3.4 28.8l6.6-1.7a12.7 12.7 0 1 0 6-23.9Zm0 23.1c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-3.9 1 1-3.8-.3-.4a10.5 10.5 0 1 1 8.9 4.9Zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2c-.2.3-.8 1-1 1.2-.2.2-.3.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.2-.6l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.7 5.8 5.2.8.3 1.4.5 1.8.6.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.1-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z"/></svg></a>
+
+  <dialog class="vehicle-dialog" id="vehicleDialog" aria-labelledby="dialogTitle"><button class="dialog-close" id="dialogClose" aria-label="Fermer">×</button><div id="dialogContent"></div></dialog>
+  <script src="app.js" defer></script>
+</body>
+</html>
+
