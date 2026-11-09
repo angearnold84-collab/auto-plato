@@ -114,6 +114,7 @@ function renderVehicles() {
   matches.forEach((_, i) => observeReveal(vehicleGrid.children[i]));
   vehicleGrid.querySelectorAll('[data-details]').forEach(button => button.addEventListener('click', () => showVehicle(button.dataset.details)));
   vehicleGrid.querySelectorAll('[data-print]').forEach(button => button.addEventListener('click', createDzirePdf));
+  scheduleFloatingWhatsAppCheck();
 }
 
 function whatsappUrl(car) {
@@ -167,6 +168,41 @@ $('#contactForm').addEventListener('submit', event => {
 
 const menuToggle = $('#menuToggle');
 const mainNav = $('#mainNav');
+const siteHeader = $('.header');
+const updateHeaderAppearance = () => siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
+updateHeaderAppearance();
+window.addEventListener('scroll', updateHeaderAppearance, { passive: true });
+const floatingWhatsApp = $('.whatsapp-float');
+let floatCheckScheduled = false;
+let floatCheckTimer;
+function scheduleFloatingWhatsAppCheck() {
+  if (floatCheckScheduled) return;
+  floatCheckScheduled = true;
+  requestAnimationFrame(() => {
+    floatCheckScheduled = false;
+    if (!window.matchMedia('(max-width: 700px)').matches) {
+      floatingWhatsApp.classList.remove('is-obscured');
+      return;
+    }
+    const floatRect = floatingWhatsApp.getBoundingClientRect();
+    const collides = [...document.querySelectorAll('main a:not(.whatsapp-float), main button, main input, main select, main textarea, main h1, main h2, main h3, main p, main img, main .vehicle-price, main .vehicle-specs')]
+      .some(element => {
+        const style = getComputedStyle(element);
+        if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) return false;
+        const rect = element.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0 && rect.right > floatRect.left && rect.left < floatRect.right && rect.bottom > floatRect.top && rect.top < floatRect.bottom;
+      });
+    floatingWhatsApp.classList.toggle('is-obscured', collides);
+  });
+}
+function queueFloatingWhatsAppCheck() {
+  if (window.matchMedia('(max-width: 700px)').matches) floatingWhatsApp.classList.add('is-obscured');
+  window.clearTimeout(floatCheckTimer);
+  floatCheckTimer = window.setTimeout(scheduleFloatingWhatsAppCheck, 140);
+}
+window.addEventListener('scroll', queueFloatingWhatsAppCheck, { passive: true });
+window.addEventListener('resize', scheduleFloatingWhatsAppCheck, { passive: true });
+scheduleFloatingWhatsAppCheck();
 menuToggle.addEventListener('click', () => {
   const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
   menuToggle.setAttribute('aria-expanded', String(!expanded));
@@ -196,4 +232,3 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 
 renderVehicles();
-
