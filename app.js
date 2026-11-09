@@ -1,4 +1,11 @@
 const waNumber = '2250504552364';
+const arrowIcon = (direction, extraClass = '') => {
+  const paths = {
+    northeast: '<path d="M7 17 17 7M8 7h9v9"/>',
+    down: '<path d="M12 5v14m-7-7 7 7 7-7"/>',
+  };
+  return `<svg class="icon-arrow ${extraClass}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${paths[direction]}</svg>`;
+};
 const vehicles = [
   {
     id:'dzire', name:'Suzuki Dzire', category:'Berlines', categoryLabel:'Berline', image:'assets/vehicles/dzire.jpg',
@@ -77,7 +84,7 @@ categories.forEach((category, index) => {
   card.className = 'category-card reveal';
   card.href = '#vehicules';
   card.dataset.filterCategory = category.query;
-  card.innerHTML = `<img src="${category.image}" alt="${category.title}" loading="lazy"><span class="cat-number">0${index+1} / CATÉGORIE</span><div><h3>${category.title}</h3><div class="cat-caption">${category.description}</div></div><span class="arrow" aria-hidden="true">↗</span>`;
+  card.innerHTML = `<img src="${category.image}" alt="${category.title}" loading="lazy"><span class="cat-number">0${index+1} / CATÉGORIE</span><div><h3>${category.title}</h3><div class="cat-caption">${category.description}</div></div>${arrowIcon('northeast', 'arrow')}`;
   card.addEventListener('click', () => { categoryFilter.value = category.query; renderVehicles(); });
   categoryGrid.append(card);
 });
@@ -93,7 +100,7 @@ function vehicleCard(car) {
     <div class="vehicle-body"><div class="vehicle-heading"><div><h3>${car.name}</h3><div class="vehicle-subtitle">${car.version}</div></div></div>
     <div class="vehicle-price"><small>Prix indicatif constructeur</small>${car.priceLabel}</div>
     <div class="vehicle-specs"><div><span>Énergie</span>${car.fuel}</div><div><span>Transmission</span>${car.transmission}</div><div><span>Places</span>${car.seats}</div></div>
-    <div class="vehicle-actions"><button class="button button-outline" type="button" data-details="${car.id}">Voir la fiche technique</button>${pdfAction(car)}<a class="button button-wa" href="${whatsappUrl(car)}" target="_blank" rel="noopener">Plus d’informations ↗</a></div></div>`;
+    <div class="vehicle-actions"><button class="button button-outline" type="button" data-details="${car.id}">Voir la fiche technique</button>${pdfAction(car)}<a class="button button-wa" href="${whatsappUrl(car)}" target="_blank" rel="noopener">Plus d’informations ${arrowIcon('northeast')}</a></div></div>`;
   return card;
 }
 
@@ -122,8 +129,8 @@ function whatsappUrl(car) {
 }
 
 function pdfAction(car) {
-  if (car.id === 'dzire') return `<button class="button button-outline" type="button" data-print="${car.id}">Créer la fiche PDF ↓</button>`;
-  return `<a class="button button-outline" href="${car.sourcePdf}" target="_blank" rel="noopener">Télécharger le PDF ↗</a>`;
+  if (car.id === 'dzire') return `<button class="button button-outline" type="button" data-print="${car.id}">Créer la fiche PDF ${arrowIcon('down')}</button>`;
+  return `<a class="button button-outline" href="${car.sourcePdf}" target="_blank" rel="noopener">Télécharger le PDF ${arrowIcon('northeast')}</a>`;
 }
 
 function createDzirePdf() {
@@ -148,7 +155,7 @@ function showVehicle(id) {
     ['Coffre / volume utile', car.trunk], ['Places', car.seats], ['Sécurité', car.safety],
     ['Confort', car.comfort], ['Garantie', car.warranty]
   ];
-  $('#dialogContent').innerHTML = `<div class="dialog-content"><div class="dialog-photo"><img src="${car.image}" alt="${car.name}"></div><div class="dialog-copy"><p class="eyebrow"><span></span> Fiche modèle · ${car.categoryLabel}</p><h2 id="dialogTitle">${car.name}</h2><p>${car.summary}</p><div class="detail-grid">${detailRows.map(([label,value]) => `<div class="detail-cell"><span>${label}</span><strong>${value}</strong></div>`).join('')}</div><p class="dialog-source">Prix et caractéristiques repris de la fiche publique de <a href="${car.source}" target="_blank" rel="noopener">${car.sourceName} ↗</a>. Disponibilité, version et tarif à confirmer. Auto-Plato n’est pas présenté comme distributeur officiel de ces marques.</p><div class="dialog-actions">${car.id === 'dzire' ? `<button class="button button-gold" type="button" data-print="${car.id}">Créer la fiche PDF ↓</button>` : `<a class="button button-gold" href="${car.sourcePdf}" target="_blank" rel="noopener">Télécharger la fiche PDF ↗</a>`}<a class="button button-wa" href="${whatsappUrl(car)}" target="_blank" rel="noopener">Plus d’informations ↗</a></div></div></div>`;
+  $('#dialogContent').innerHTML = `<div class="dialog-content"><div class="dialog-photo"><img src="${car.image}" alt="${car.name}"></div><div class="dialog-copy"><p class="eyebrow"><span></span> Fiche modèle · ${car.categoryLabel}</p><h2 id="dialogTitle">${car.name}</h2><p>${car.summary}</p><div class="detail-grid">${detailRows.map(([label,value]) => `<div class="detail-cell"><span>${label}</span><strong>${value}</strong></div>`).join('')}</div><p class="dialog-source">Prix et caractéristiques repris de la fiche publique de <a href="${car.source}" target="_blank" rel="noopener">${car.sourceName} ${arrowIcon('northeast')}</a>. Disponibilité, version et tarif à confirmer. Auto-Plato n’est pas présenté comme distributeur officiel de ces marques.</p><div class="dialog-actions">${car.id === 'dzire' ? `<button class="button button-gold" type="button" data-print="${car.id}">Créer la fiche PDF ${arrowIcon('down')}</button>` : `<a class="button button-gold" href="${car.sourcePdf}" target="_blank" rel="noopener">Télécharger la fiche PDF ${arrowIcon('northeast')}</a>`}<a class="button button-wa" href="${whatsappUrl(car)}" target="_blank" rel="noopener">Plus d’informations ${arrowIcon('northeast')}</a></div></div></div>`;
   dialog.showModal();
   dialog.querySelectorAll('[data-print]').forEach(button => button.addEventListener('click', createDzirePdf));
 }
